@@ -1,0 +1,53 @@
+name: Publish site
+
+# The site is built from the open-he-mchose/docs repository.
+# Runs on changes to this repository, once a day (to pick up new docs commits) and on demand
+# (Actions → Publish site → Run workflow).
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: site-src
+      - uses: actions/checkout@v4
+        with:
+          repository: open-he-mchose/docs
+          path: docs
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r site-src/requirements.txt
+      - run: mkdocs build --strict -f site-src/mkdocs.yml
+        env:
+          DISABLE_MKDOCS_2_WARNING: "true"
+          NO_MKDOCS_2_WARNING: "1"
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site-src/site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

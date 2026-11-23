@@ -1,0 +1,104 @@
+site_name: open-he-mchose docs
+site_description: Unofficial documentation of MCHOSE magnetic (Hall-effect) keyboards — protocol, firmware, known issues
+site_url: https://open-he-mchose.github.io/
+# "Edit" links and the repo button point to the documentation repository, not to this one.
+repo_url: https://github.com/open-he-mchose/docs
+repo_name: open-he-mchose/docs
+edit_uri: edit/main/
+copyright: AI-generated documentation (Claude, Anthropic) · CC BY-SA 4.0 · Not affiliated with MCHOSE
+
+# The content is the open-he-mchose/docs repository, checked out next to this one
+# (locally: open-he-mchose/docs; in CI the workflow checks it out to ../docs as well).
+docs_dir: ../docs
+site_dir: site
+exclude_docs: |
+  /.git/
+  /.github/
+  __pycache__/
+
+theme:
+  name: material
+  language: en
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle: {icon: material/weather-night, name: Dark mode}
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle: {icon: material/weather-sunny, name: Light mode}
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - content.action.edit
+
+plugins:
+  - search
+
+markdown_extensions:
+  - tables
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.superfences
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - toc:
+      permalink: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify {kwds: {case: lower}}
+
+validation:
+  links:
+    not_found: warn
+    anchors: warn
+    unrecognized_links: warn
+
+nav:
+  - Home: README.md
+  - Keyboards:
+      - keyboards/README.md
+      - Jet75-II:
+          - keyboards/jet75-ii/README.md
+          - USB interfaces: keyboards/jet75-ii/usb-interfaces.md
+          - Key matrix: keyboards/jet75-ii/key-matrix.md
+          - Switches and travel: keyboards/jet75-ii/switches-and-travel.md
+          - Firmware V116: keyboards/jet75-ii/firmware.md
+          - Known issues: keyboards/jet75-ii/known-issues.md
+          - Verification log: keyboards/jet75-ii/verification.md
+          - Open questions: keyboards/jet75-ii/open-questions.md
+  - Protocols:
+      - protocols/README.md
+      - glw:
+          - protocols/glw/README.md
+          - Framing: protocols/glw/framing.md
+          - Commands: protocols/glw/commands.md
+          - FuncConfig: protocols/glw/funcconfig.md
+          - Key trigger: protocols/glw/key-trigger.md
+          - Keymap and key codes: protocols/glw/keymap-and-keycodes.md
+          - Lighting: protocols/glw/lighting.md
+          - Depth stream: protocols/glw/depth-stream.md
+          - Advanced keys: protocols/glw/advanced-keys.md
+          - Calibration: protocols/glw/calibration.md
+          - Firmware update: protocols/glw/firmware-update.md
+      - qhw: protocols/qhw/README.md
+  - Known issues:
+      - known-issues/README.md
+      - Official web driver: known-issues/web-driver.md
+  - Reverse engineering:
+      - reverse-engineering/README.md
+      - Web driver: reverse-engineering/web-driver.md
+      - Firmware analysis: reverse-engineering/firmware-analysis.md
+      - USB capture: reverse-engineering/usb-capture.md
+  - Contributing: CONTRIBUTING.md
