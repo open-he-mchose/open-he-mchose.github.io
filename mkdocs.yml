@@ -67,6 +67,7 @@ validation:
 
 nav:
   - Home: README.md
+  - Roadmap: roadmap.md
   - Keyboards:
       - keyboards/README.md
       - Jet75-II:
