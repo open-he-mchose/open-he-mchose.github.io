@@ -23,14 +23,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           path: site-src
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           repository: open-he-mchose/docs
           path: docs
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - run: pip install -r site-src/requirements.txt
@@ -38,7 +38,7 @@ jobs:
         env:
           DISABLE_MKDOCS_2_WARNING: "true"
           NO_MKDOCS_2_WARNING: "1"
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: site-src/site
 
