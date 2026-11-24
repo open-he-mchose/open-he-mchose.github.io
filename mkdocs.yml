@@ -91,6 +91,7 @@ nav:
           - Lighting: protocols/glw/lighting.md
           - Depth stream: protocols/glw/depth-stream.md
           - Advanced keys: protocols/glw/advanced-keys.md
+          - Macros: protocols/glw/macros.md
           - Calibration: protocols/glw/calibration.md
           - Firmware update: protocols/glw/firmware-update.md
       - qhw: protocols/qhw/README.md
